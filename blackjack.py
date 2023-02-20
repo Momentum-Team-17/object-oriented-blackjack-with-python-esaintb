@@ -1,5 +1,9 @@
+import random
+
 SUITS = ['♠', '♥', '♦', '♣']
 RANKS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
+
+# OBJECT CLASSES
 
 
 class Card:
@@ -27,6 +31,22 @@ class Game:
         self.dealer = None
         self.deck = None
 
+
+class Player:
+    def __init__(self):
+        self.deck = deck
+        self.dealer = dealer
+        self.game = game
+        self.turn = turn
+
+
+class Dealer:
+    def __init__(self):
+        self.cards = cards
+        self.deck = deck
+        self.game = game
+        self.turn = turn
+
     def setup(self):
         # calls line 12
         self.deck = Deck()
@@ -35,6 +55,8 @@ class Game:
         for card in self.deck.cards:
             print(card)
 
+def play_game():
+    
 
 new_game = Game()
 new_game.setup()
