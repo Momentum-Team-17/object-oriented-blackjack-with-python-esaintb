@@ -24,6 +24,17 @@ class Deck:
             for rank in RANKS:
                 self.cards.append(Card(suit, rank))
 
+        def shuffle(self):
+            random.shuffle(self.deck)
+
+        def deal(self):
+            single_card = self.deck.pop()
+            return single_card
+
+
+test_deck = Deck()
+print(test_deck)
+
 
 class Game:
     def __init__(self):
@@ -34,7 +45,7 @@ class Game:
 
 class Player:
     def __init__(self):
-        self.deck = deck
+        self.cards = []
         self.dealer = dealer
         self.game = game
         self.turn = turn
@@ -55,11 +66,11 @@ class Dealer:
         for card in self.deck.cards:
             print(card)
 
-def play_game():
-    
+# def play_game():
 
-new_game = Game()
-new_game.setup()
+
+# new_game = Game()
+# new_game.setup()
 
 # created the game and the deck with cards
 
