@@ -1,0 +1,46 @@
+~ classes ~
+
+CARD
+- attributes
+    - suit
+    - rank
+
+- methods
+    - draw
+
+
+DECK
+- attributes
+    - cards
+
+- methods
+    - shuffle
+    - deal card
+
+
+PLAYER
+- attributes
+    - name
+    - is it their turn
+    - cards ('hand')
+        - score (dependent on hand)
+
+- methods
+    - hit or check 
+
+
+DEALER
+- attributes
+    - name
+    - is it their turn
+    - cards ('hand')
+       - score (dependent on hand)
+- methods
+
+
+GAME 
+- attributes
+    - winner/loser
+    - in progress/finished
+
+- methods
