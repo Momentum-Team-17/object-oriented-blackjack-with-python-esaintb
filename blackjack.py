@@ -3,9 +3,8 @@ import random
 SUITS = ['♠', '♥', '♦', '♣']
 RANKS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 
+
 # OBJECT CLASSES
-
-
 class Card:
     def __init__(self, suit, rank):
         self.suit = suit
@@ -18,61 +17,74 @@ class Card:
 class Deck:
     def __init__(self):
         self.cards = []
+        self.add_cards()
 
     def add_cards(self):
         for suit in SUITS:
             for rank in RANKS:
+                new_card = Card(suit, rank)
                 self.cards.append(Card(suit, rank))
 
-        def shuffle(self):
-            random.shuffle(self.deck)
-
-        def deal(self):
-            single_card = self.deck.pop()
-            return single_card
-
-
-test_deck = Deck()
-print(test_deck)
-
-
-class Game:
-    def __init__(self):
-        self.player = None
-        self.dealer = None
-        self.deck = None
+    def shuffle(self):
+        random.shuffle(self.deck)
 
 
 class Player:
     def __init__(self):
-        self.cards = []
-        self.dealer = dealer
-        self.game = game
-        self.turn = turn
+        self.name = input("What is your name? ")
+        self.hand = []
+
+    def __str__(self):
+        return f'{self.name} is the player'
+
+    def view_cards(self):
+        for card in self.hand:
+            print(card)
+
+    def calculate(self):
+        pass
 
 
-class Dealer:
+class Dealer(Player):
     def __init__(self):
-        self.cards = cards
-        self.deck = deck
-        self.game = game
-        self.turn = turn
+        self.name = 'Dealer'
+        self.hand = []
+
+    def __str__(self):
+        # when we write cariables and methods with the same
+        # as the parent class, they override the code from
+        # the parent class (Player)
+        return f'{self.name} is the dealer'
+
+    def end_game(self):
+        pass
+
+
+class Game:
+    def __init__(self):
+        self.player = Player()
+        self.dealer = Dealer()
+        self.setup()
 
     def setup(self):
-        # calls line 12
+        # creates a deck
         self.deck = Deck()
-        # calls line 15
+        # adds card for deck
         self.deck.add_cards()
         for card in self.deck.cards:
             print(card)
 
-# def play_game():
+    def deal(self):
+        pass
+
+    def player_turn(self):  # player decides how many times to hit before playig
+        pass
+
+    def dealer_turn(self):
+        pass
 
 
-# new_game = Game()
-# new_game.setup()
-
-# created the game and the deck with cards
+new_game = Game()
 
 # TO DO
 # make a player, like we did with Deck
