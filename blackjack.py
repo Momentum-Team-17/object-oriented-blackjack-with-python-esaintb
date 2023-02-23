@@ -103,7 +103,22 @@ class Game:
         #     print(card)
 
     def deal(self):
-        pass
+        self.setup()
+        self.deck.shuffle()
+        print(new_game.player)
+        card = self.deck.cards.pop()
+        self.player.hand.append(card)
+        card = self.deck.cards.pop()
+        self.player.hand.append(card)
+        print(f'{self.player.name}s hand is ')
+        self.player.view_cards()
+        print(new_game.dealer)
+        card = self.deck.cards.pop()
+        self.dealer.hand.append(card)
+        card = self.deck.cards.pop()
+        self.dealer.hand.append(card)
+        print('Dealer hand is ')
+        self.dealer.view_cards()
 
     def player_turn(self):  # player decides how many times to hit before playing
         pass
