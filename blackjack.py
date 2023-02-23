@@ -42,21 +42,21 @@ class Player:
             print(card)
 
     def calculate(self):
-        hand_value = 0
-        aces = 0
+        card_value = 0
+        score = 0
         for card in self.hand:
-            if card.rank == 'A':
-                aces += 1
-            elif card.rank in ['K', 'Q', 'J']:
-                hand_value += 10
+            if card.rank in ['J', 'Q', 'K']:
+                card_value = 10
+            elif card.rank == 'A':
+                if score >= 11:
+                    card_value = 1
+                else:
+                    card_value = 11
             else:
-                hand_value += card.rank
-        for i in range(aces):
-            if hand_value + 11 > 21:
-                hand_value += 1
-            else:
-                hand_value += 11
-        return hand_value
+                card_value = card.rank
+            score += card_value
+        print('Player score: ', score)
+        return score
 
 
 class Dealer(Player):
@@ -70,8 +70,22 @@ class Dealer(Player):
         # the parent class (Player)
         return f'{self.name} is the dealer'
 
-    def end_game(self):
-        pass
+    def calculate(self):
+                card_value = 0
+        score = 0
+        for card in self.hand:
+            if card.rank in ['J', 'Q', 'K']:
+                card_value = 10
+            elif card.rank == 'A':
+                if score >= 11:
+                    card_value = 1
+                else:
+                    card_value = 11
+            else:
+                card_value = card.rank
+            score += card_value
+        print('Dealer score: ', score)
+        return score
 
 
 class Game:
