@@ -71,7 +71,7 @@ class Dealer(Player):
         return f'{self.name} is the dealer'
 
     def calculate(self):
-                card_value = 0
+        card_value = 0
         score = 0
         for card in self.hand:
             if card.rank in ['J', 'Q', 'K']:
@@ -99,8 +99,8 @@ class Game:
         self.deck = Deck()
         # adds card for deck
         self.deck.add_cards()
-        for card in self.deck.cards:
-            print(card)
+        # for card in self.deck.cards:
+        #     print(card)
 
     def deal(self):
         pass
