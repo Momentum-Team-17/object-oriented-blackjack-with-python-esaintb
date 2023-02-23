@@ -42,7 +42,21 @@ class Player:
             print(card)
 
     def calculate(self):
-        pass
+        hand_value = 0
+        aces = 0
+        for card in self.hand:
+            if card.rank == 'A':
+                aces += 1
+            elif card.rank in ['K', 'Q', 'J']:
+                hand_value += 10
+            else:
+                hand_value += card.rank
+        for i in range(aces):
+            if hand_value + 11 > 21:
+                hand_value += 1
+            else:
+                hand_value += 11
+        return hand_value
 
 
 class Dealer(Player):
@@ -77,7 +91,7 @@ class Game:
     def deal(self):
         pass
 
-    def player_turn(self):  # player decides how many times to hit before playig
+    def player_turn(self):  # player decides how many times to hit before playing
         pass
 
     def dealer_turn(self):
