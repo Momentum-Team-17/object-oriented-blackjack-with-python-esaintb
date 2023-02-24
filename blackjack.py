@@ -57,6 +57,7 @@ class Player:
 # setting parameter (communicates between two separate classes) of card to connect the two objects
     def add_cards_to_player(self, cards):
         self.hand.extend(cards)
+        # self.calculate
 
     def view_hand(self):
         for card in self.hand:
@@ -156,8 +157,17 @@ class Game:
         self.dealer.add_cards_to_dealer(dealing_it)
         self.dealer.view_hand()
 
-    def player_turn(self, stay):
-        
+    def player_turn(self):
+        while True:
+            decision = input("hit or stay? ")
+            if (decision == "hit") or (decision == "Hit"):
+                self.player.add_cards_to_player(self.deck.draw_cards(1))
+                self.player.view_hand()
+                # print(self.player.score)
+            elif (decision == "stay") or (decision == "Stay"):
+                return
+            else:
+                print("oopsie, type something else")
 
     def dealer_turn(self):
         pass
@@ -169,6 +179,7 @@ class Game:
 
 if __name__ == '__main__':
     my_game = Game()
+    my_game.player_turn()
 
     '''
     # initialize the deck function
