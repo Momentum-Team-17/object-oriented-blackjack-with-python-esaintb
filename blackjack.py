@@ -109,6 +109,14 @@ class Dealer(Player):
         # the parent class (Player)
         return f'{self.name} is the dealer'
 
+    # setting parameter (communicates between two separate classes) of card to connect the two objects
+    def add_cards_to_dealer(self, cards):
+        self.hand.extend(cards)
+
+    def view_hand(self):
+        for card in self.hand:
+            print(card)
+
     def calculate(self):
         pass
         # card_value = 0
@@ -134,6 +142,7 @@ class Game:
         self.dealer = Dealer()
         self.deck = Deck()
         self.deck.shuffle()
+        print(self.deck)
         self.deal()
 
     def play_game(self):
@@ -142,9 +151,13 @@ class Game:
     def deal(self):
         dealing_it = self.deck.draw_cards(2)
         self.player.add_cards_to_player(dealing_it)
+        self.player.view_hand()
+        dealing_it = self.deck.draw_cards(2)
+        self.dealer.add_cards_to_dealer(dealing_it)
+        self.dealer.view_hand()
 
-    def player_turn(self, stay):  # player decides how many times to hit before playing
-        pass
+    def player_turn(self, stay):
+        
 
     def dealer_turn(self):
         pass
@@ -155,6 +168,7 @@ class Game:
 
 
 if __name__ == '__main__':
+    my_game = Game()
 
     '''
     # initialize the deck function
