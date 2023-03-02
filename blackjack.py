@@ -11,7 +11,7 @@ class Card:
         self.rank = rank
 
     def __str__(self):
-        return f'{self.rank} of {self.suit}'
+        return f'{self.rank}{self.suit}'
 
 
 class Deck:
@@ -50,6 +50,7 @@ class Player:
         self.score = 0
         # TODO CHANGE BELOW THIS LINE
         self.name = "emmaline"
+        self.calculate()
 
     def __str__(self):
         return f'{self.name} is the player'
@@ -64,38 +65,21 @@ class Player:
             print(card)
 
     def calculate(self):
-        pass
-        # card_value = 0
-        # score = 0
-        # for card in self.hand:
-        #     if card.rank in ['J', 'Q', 'K']:
-        #         card_value = 10
-        #     elif card.rank == 'A':
-        #         if score >= 11:
-        #             card_value = 1
-        #         else:
-        #             card_value = 11
-        #     else:
-        #         card_value = card.rank
-        #     score += card_value
-        # print('Player score: ', score)
-        # return score
-
-        # hand_value = 0
-        # aces = 0
-        # for card in self.hand:
-        #     if card.rank == 'A':
-        #         aces += 1
-        #     elif card.rank in ['K', 'Q', 'J']:
-        #         hand_value += 10
-        #     else:
-        #         hand_value += card.rank
-        # for i in range(aces):
-        #     if hand_value + 11 > 21:
-        #         hand_value += 1
-        #     else:
-        #         hand_value += 11
-        # return hand_value
+        card_value = 0
+        score = 0
+        for card in self.hand:
+            if card.rank in ['J', 'Q', 'K']:
+                card_value = 10
+            elif card.rank == 'A':
+                if score >= 11:
+                    card_value = 1
+                else:
+                    card_value = 11
+            else:
+                card_value = card.rank
+            score += card_value
+        print('Your score: ', score)
+        return score
 
 
 class Dealer(Player):
@@ -103,6 +87,7 @@ class Dealer(Player):
         self.name = 'Dealer'
         self.hand = []
         self.score = 0
+        self.calculate()
 
     def __str__(self):
         # when we write cariables and methods with the same
@@ -119,22 +104,21 @@ class Dealer(Player):
             print(card)
 
     def calculate(self):
-        pass
-        # card_value = 0
-        # score = 0
-        # for card in self.hand:
-        #     if card.rank in ['J', 'Q', 'K']:
-        #         card_value = 10
-        #     elif card.rank == 'A':
-        #         if score >= 11:
-        #             card_value = 1
-        #         else:
-        #             card_value = 11
-        #     else:
-        #         card_value = card.rank
-        #     score += card_value
-        # print('Dealer score: ', score)
-        # return score
+        card_value = 0
+        score = 0
+        for card in self.hand:
+            if card.rank in ['J', 'Q', 'K']:
+                card_value = 10
+            elif card.rank == 'A':
+                if score >= 11:
+                    card_value = 1
+                else:
+                    card_value = 11
+            else:
+                card_value = card.rank
+            score += card_value
+        print('Dealer score: ', score)
+        return score
 
 
 class Game:
@@ -144,18 +128,21 @@ class Game:
         self.deck = Deck()
         self.deck.shuffle()
         print(self.deck)
-        self.deal()
+        self.play_game = ()
+        self.deal_player()
+        self.deal_dealer()
 
     def play_game(self):
         print("Welcome to Blackjack!")
 
-    def deal(self):
+    def deal_player(self):
+        print("Your hand:")
         dealing_it = self.deck.draw_cards(2)
         self.player.add_cards_to_player(dealing_it)
         self.player.view_hand()
-        dealing_it = self.deck.draw_cards(2)
-        self.dealer.add_cards_to_dealer(dealing_it)
-        self.dealer.view_hand()
+        # dealing_it = self.deck.draw_cards(2)
+        # self.dealer.add_cards_to_dealer(dealing_it)
+        # self.dealer.view_hand()
 
     def player_turn(self):
         while True:
@@ -163,11 +150,21 @@ class Game:
             if (decision == "hit") or (decision == "Hit"):
                 self.player.add_cards_to_player(self.deck.draw_cards(1))
                 self.player.view_hand()
-                # print(self.player.score)
+                print(self.player.score)
             elif (decision == "stay") or (decision == "Stay"):
-                return
+                pass
+                # dealing_it = self.deck.draw_cards(2)
+                # self.dealer.add_cards_to_dealer(dealing_it)
+                # self.dealer.view_hand()
             else:
                 print("oopsie, type something else")
+
+    def deal_dealer(self):
+        if self.player_turn == "stay":
+            print("Dealer's hand:")
+            dealing_it = self.deck.draw_cards(2)
+            self.dealer.add_cards_to_dealer(dealing_it)
+            self.dealer.view_hand()
 
     def dealer_turn(self):
         pass
