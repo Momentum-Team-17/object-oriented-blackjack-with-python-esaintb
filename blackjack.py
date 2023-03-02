@@ -78,7 +78,7 @@ class Player:
             else:
                 card_value = card.rank
             score += card_value
-        print('Your score: ', score)
+        # print('Your score: ', score)
         return score
 
 
@@ -117,7 +117,7 @@ class Dealer(Player):
             else:
                 card_value = card.rank
             score += card_value
-        print('Dealer score: ', score)
+        # print('Dealer score: ', score)
         return score
 
 
@@ -128,12 +128,8 @@ class Game:
         self.deck = Deck()
         self.deck.shuffle()
         print(self.deck)
-        self.play_game = ()
         self.deal_player()
-        self.deal_dealer()
-
-    def play_game(self):
-        print("Welcome to Blackjack!")
+        # self.deal_dealer()
 
     def deal_player(self):
         print("Your hand:")
@@ -144,37 +140,55 @@ class Game:
         # self.dealer.add_cards_to_dealer(dealing_it)
         # self.dealer.view_hand()
 
+    def deal_dealer(self):
+        print("Dealer's hand:")
+        dealing_it = self.deck.draw_cards(2)
+        self.dealer.add_cards_to_player(dealing_it)
+        self.dealer.view_hand()
+
     def player_turn(self):
-        while True:
+        while "decision" != "stay":
+            player_total = self.player.calculate()
             decision = input("hit or stay? ")
             if (decision == "hit") or (decision == "Hit"):
                 self.player.add_cards_to_player(self.deck.draw_cards(1))
                 self.player.view_hand()
-                print(self.player.score)
+                print(f'Your score: {self.player.calculate()}')
             elif (decision == "stay") or (decision == "Stay"):
-                pass
-                # dealing_it = self.deck.draw_cards(2)
-                # self.dealer.add_cards_to_dealer(dealing_it)
-                # self.dealer.view_hand()
-            else:
-                print("oopsie, type something else")
-
-    def deal_dealer(self):
-        if self.player_turn == "stay":
-            print("Dealer's hand:")
-            dealing_it = self.deck.draw_cards(2)
-            self.dealer.add_cards_to_dealer(dealing_it)
+                print(f'Your score: {self.player.calculate()}')
+                break
+        dealer_sum = 0
+        self.deal_dealer()
+        while dealer_sum < 17:
+            dealer_total = self.dealer.calculate()
+            self.dealer.add_cards_to_dealer(self.deck.draw_cards(1))
+            dealer_sum += dealer_total
             self.dealer.view_hand()
+            print(f'Dealer score: {self.dealer.calculate()}')
+            print(dealer_sum)
+            if dealer_sum > 21:
+                print("Dealer Bust!")
+            elif dealer_sum == player_total:
+                print("Tie!")
+            elif dealer_sum > player_total:
+                print("Dealer wins!")
+            else:
+                print("player wins")
+                print(dealer_sum)
+                print(player_total)
+            break
+            # else:
+            #     print("oopsie, type something else")
 
-    def dealer_turn(self):
-        pass
 
 # sets game-ending parameters
+
     def end_game(self, winner=None):
         pass
 
 
 if __name__ == '__main__':
+    print("Welcome to Blackjack!")
     my_game = Game()
     my_game.player_turn()
 
